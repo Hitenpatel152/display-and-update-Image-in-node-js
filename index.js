@@ -26,7 +26,7 @@ app.post('/createimagepage',(req,res)=>{
 
     mc.connect(url,(err,db)=>{
         if (err) throw err;
-        console.log("connected....");
+       
         var dbo = db.db(dbname);
         var collection = dbo.collection("imagewithdata");
         var data ={
@@ -47,9 +47,9 @@ app.post('/createimagepage',(req,res)=>{
         db.close();
     });
 });
-
+//file upload code using multer.....
 app.post('/FileUpload',function(req,res){
-    console.log("avyo");
+    
     var storage = multer.diskStorage({
 
         destination:function(req,file,cb){
@@ -58,7 +58,7 @@ app.post('/FileUpload',function(req,res){
         filename :function(req,file,cb){
             paths = file.fieldname + "-" +Date.now()+path.extname(file.originalname);
             cb(null,paths);
-            console.log(file);
+            
         } 
     });
     var upload = multer({storage:storage}).single("filetoupload");
@@ -155,7 +155,7 @@ app.post('/imagerecordApi',(req,res)=>{
             };
 
         
-        console.log(updatecontent);
+     
 
         collection.updateOne(updatecondition,updatecontent,function(err,result){
             if(err) throw err;
